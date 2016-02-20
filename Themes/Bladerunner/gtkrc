@@ -1,0 +1,221 @@
+gtk_color_scheme = "fg_color:#d3d7cf\nbg_color:#282828\nbase_color:#2c3028\ntext_color:#d3d7cf\nselected_bg_color:#386030\nselected_fg_color:#d3d7cf"
+
+
+gtk-icon-sizes = "gtk-menu=13,13:gtk-small-toolbar=16,16:gtk-large-toolbar=24,24:gtk-dnd=32,32"
+gtk-toolbar-icon-size = small-toolbar
+
+# disable images in buttons. i've only seen ugly delphi apps use this feature.
+gtk-button-images = 0
+
+# enable/disable images in menus. most "stock" microsoft apps don't use these, except sparingly.
+# the office apps use them heavily, though.
+gtk-menu-images = 1
+
+# use the win32 button ordering instead of the GNOME HIG one, where applicable
+gtk-alternative-button-order = 1
+
+# use the win32 sort indicators direction, as in Explorer
+gtk-alternative-sort-arrows = 1
+
+# Windows users don't expect the PC Speaker beeping at them when they backspace in an empty textview and stuff like that
+gtk-error-bell = 0
+
+# hide mnemonic underlines until the Alt key is pressed
+gtk-auto-mnemonics = 1
+
+gtk-theme-name = "Bladerunner"
+
+style "theme-default"
+{
+  fg[NORMAL]        = @fg_color 
+  fg[PRELIGHT]      = @selected_fg_color
+  fg[SELECTED]      = @selected_fg_color
+  fg[ACTIVE]        = darker (@fg_color)
+  fg[INSENSITIVE]   = @fg_color
+
+  bg[NORMAL]        = @bg_color
+  bg[PRELIGHT]      = @selected_bg_color
+  bg[SELECTED]	    = @selected_bg_color
+  bg[INSENSITIVE]   = shade(0.3, @selected_bg_color)
+  bg[ACTIVE]        = @bg_color
+
+  base[NORMAL]     	=  @base_color
+  base[ACTIVE]     	=  shade (0.7,@base_color)
+  base[PRELIGHT]   	=  @base_color
+  base[SELECTED]    =  @selected_bg_color
+  base[INSENSITIVE]	=  shade (1.025,@bg_color)
+
+  text[NORMAL]     	=  @text_color
+  text[ACTIVE]      	=  @text_color
+  text[PRELIGHT]   	=  @text_color
+  text[SELECTED]   	=  lighter (@selected_fg_color)
+  text[INSENSITIVE]	=  @fg_color
+}
+
+style "theme-tree" = "theme-default"
+{
+  	xthickness = 2
+  	ythickness = 2
+	base[NORMAL] = lighter(@bg_color) #background of list
+	base[SELECTED] = shade(0.7, @selected_bg_color) #background of selected item
+	base[ACTIVE] = shade(0.7, @selected_bg_color) #background of selected while not focus
+	text[ACTIVE] = lighter(@selected_fg_color)
+}
+style "theme-wide" = "theme-default"
+{
+  	xthickness = 2
+  	ythickness = 2
+}
+
+style "theme-wider" = "theme-default"
+{
+  	xthickness = 2
+  	ythickness = 2
+}
+
+style "theme-entry" = "theme-wider"
+{
+    bg[SELECTED]	    = @selected_bg_color
+}
+
+style "theme-button" = "theme-wider"
+{
+  	text[PRELIGHT]  = @selected_fg_color
+	bg[PRELIGHT]	= @selected_bg_color
+	bg[NORMAL]		= shade (0.60,@selected_bg_color)
+}
+
+
+style "theme-notebook" = "theme-wide"
+{
+  	bg[SELECTED]    = @selected_bg_color
+}
+
+style "theme-menu" = "theme-default"
+{
+  	bg[NORMAL] = @bg_color
+}
+
+style "theme-menu-item" = "theme-default"
+{
+  	fg[NORMAL]		= @fg_color 
+  	fg[PRELIGHT] 		= @selected_fg_color
+  	fg[INSENSITIVE]	= @selected_fg_color
+  	bg[SELECTED]	    = @selected_bg_color
+}
+  
+
+style "theme-menubar" = "theme-default"
+{
+  	bg[NORMAL] = @bg_color
+}
+
+style "theme-menubar-item"
+{
+	fg[PRELIGHT]	= @selected_fg_color
+}
+
+style "theme-frame-title" = "theme-default"
+{
+  	fg[NORMAL] = @fg_color
+}
+
+style "theme-tooltips" = "theme-default"
+{
+  	bg[NORMAL] = @bg_color
+}
+
+style "theme-progressbar" = "theme-wide"
+{
+  	bg[NORMAL]    = @bg_color # outline of progressbar
+  	bg[SELECTED]	    = @selected_bg_color # progressbar color
+}
+
+style "metacity-frame"
+{
+  	bg[SELECTED] = @selected_bg_color
+  	fg[SELECTED] = @selected_fg_color
+}
+
+class "MetaFrames"	style "metacity-frame"
+class "GtkWindow"	style "metacity-frame"
+
+style "panel"
+{
+	bg[NORMAL]   = @bg_color
+	fg[NORMAL]   = @fg_color 
+	text[NORMAL] = @fg_color 
+}
+
+style "panelbuttons"
+{
+    bg[NORMAL] 		= @bg_color
+    bg[ACTIVE]		= @bg_color 
+    bg[SELECTED]	= @selected_bg_color 
+    bg[PRELIGHT]	= @bg_color
+    
+    fg[NORMAL]		= @fg_color
+    fg[ACTIVE]		= @selected_fg_color 
+    fg[PRELIGHT]	= @selected_fg_color
+}
+
+style "chrome-gtk-frame"
+{
+    ChromeGtkFrame::frame-color = @bg_color
+    ChromeGtkFrame::inactive-frame-color = darker(@bg_color)
+
+}
+
+class "ChromeGtkFrame" style "chrome-gtk-frame"
+
+style "theme-scrollbar" = "theme-button" {
+    xthickness = 2
+    ythickness = 2
+
+	fg[NORMAL] = @fg_color
+	
+    bg[NORMAL] = shade (0.72, @selected_bg_color)
+    bg[PRELIGHT] = shade (0.90, @selected_bg_color)
+ #   bg[SELECTED] = @bg_color
+    bg[ACTIVE] = shade (1.2, @bg_color)
+}
+
+class "*Panel*" 						style "panel"
+widget_class "*Panel*GtkToggleButton"   style "panelbuttons"
+widget_class "*Panel*Button" 			style "panelbuttons"
+widget_class "*Panel*b*" 				style "panelbuttons"
+
+class "GtkWidget"      style "theme-default"
+class "GtkButton"      style "theme-button"
+class "GtkScale"       style "theme-scrollbar"
+class "GtkCombo"       style "theme-button"
+class "GtkRange"       style "theme-scrollbar"
+class "GtkFrame"       style "theme-wide"
+class "GtkMenu"        style "theme-menu"
+class "GtkEntry"       style "theme-entry"
+class "GtkMenuItem"    style "theme-menu-item"
+class "GtkNotebook"    style "theme-notebook"
+class "GtkProgressBar" style "theme-progressbar"
+class "GtkScale"   	   style "theme-scrollbar"
+#class "GtkScrollbar"   style "theme-scrollbar"
+class "*MenuBar*"      style "theme-menubar"
+
+class "*GtkTree*" style "theme-tree"
+
+widget_class "*MenuItem.*" style "theme-menu-item"
+widget_class "*MenuBar.*"  style "theme-menubar-item"
+
+widget_class "*.GtkComboBox.GtkButton" style "theme-combo"
+widget_class "*.GtkCombo.GtkButton"    style "theme-combo"
+
+widget_class "*.tooltips.*.GtkToggleButton" style "theme-tasklist"
+widget "gtk-tooltips" 						style "theme-tooltips"
+
+widget_class "*.GtkTreeView.GtkButton"  style "theme-tree"
+widget_class "*.GtkCTree.GtkButton" 	style "theme-tree"
+widget_class "*.GtkList.GtkButton" 		style "theme-tree"
+widget_class "*.GtkCList.GtkButton" 	style "theme-tree"
+widget_class "*.GtkFrame.GtkLabel" 		style "theme-frame-title"
+
+widget_class "*.GtkNotebook.*.GtkEventBox" style "theme-notebook"
+widget_class "*.GtkNotebook.*.GtkViewport" style "theme-notebook" 
